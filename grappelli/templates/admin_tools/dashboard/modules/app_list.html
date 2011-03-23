@@ -17,7 +17,7 @@
         {% endif %}
     {% for child in module.children %}
     
-    <div class="module">
+    <div class="module{% if forloop.last %} last{% endif %}">
         {% if subindex %}
             <h4><a href="{{ child.url }}">{{ child.title }}</a></h4>
         {% else %}
@@ -25,7 +25,7 @@
         {% endif %}
         
         {% for model in child.models %}
-            <div class="row">
+            <div class="row{% if forloop.last %} last{% endif %}">
                 {% if model.change_url %}
                     <a href="{{ model.change_url }}">{{ model.title }}</a>
                 {% else %}

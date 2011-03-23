@@ -21,7 +21,7 @@
         <div class="column span-12" id="apps_init">
             {% if app_list %}
                 {% for app in app_list %}
-                    <div class="module" id="app_{{ app.name|lower }}">
+                    <div class="module{% if forloop.last %} last{% endif %}" id="app_{{ app.name|lower }}">
                         <h2>{% trans app.name %}</h2>
                         {% for model in app.models %}
                             <div class="row">

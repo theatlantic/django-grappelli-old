@@ -59,9 +59,9 @@
                                 <!-- Logout -->
                                 {% url admin:logout as logout_url %}
                                 {% if logout_url %}
-                                    <li><a href="{{ logout_url }}">
+                                    <li class="last"><a href="{{ logout_url }}">
                                 {% else %}
-                                    <li><a href="{{ root_path }}logout/">
+                                    <li class="last"><a href="{{ root_path }}logout/">
                                 {% endif %}
                                 {% trans 'Log out' %}</a></li>
                             </ul>

@@ -4,12 +4,12 @@
 {% if subindex %}
     <div class="module actions {% for item in module.css_classes %}{{ item }} {% endfor %}">
         <h3>{% trans 'Recent Actions' %}</h2>
-        <div class="module">
+        <div class="module last">
             <h4>{% trans 'My Actions' %}</h3>
 {% else %}
     <div class="module actions {% for item in module.css_classes %}{{ item }} {% endfor %}">
         <h2>{% trans 'Recent Actions' %}</h2>
-        <div class="module">
+        <div class="module last">
             <h3>{% trans 'My Actions' %}</h3>
 {% endif %}
         {% if module.children %}
