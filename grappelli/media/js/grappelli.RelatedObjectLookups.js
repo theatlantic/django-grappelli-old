@@ -147,7 +147,9 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
         obj.data('old_val', obj.val());
         
         var link = obj.next();
-        var spliturl = link.attr('href').split('/');
+        href = link.attr('href');
+        if (!href) return;
+        var spliturl = href.split('/');
         var app_label = spliturl[spliturl.length-3];
         var model_name= spliturl[spliturl.length-2];
 
@@ -169,9 +171,9 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
             text.text('');
             if (item) {
                 if (item.length > CHAR_MAX_LENGTH) {
-                    text.text(decodeURI(item.substr(0, CHAR_MAX_LENGTH) + " ..."));
+                    text.text(item.substr(0, CHAR_MAX_LENGTH) + " ...");
                 } else {
-                    text.text(decodeURI(item));
+                    text.text(item);
                 }
                 
             }
@@ -228,7 +230,9 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
         
         var link = obj.next();
         if (link.length == 0) return;
-        var spliturl = link.attr('href').split('/');
+        href = link.attr('href');
+        if (!href) return;
+        var spliturl = href.split('/');
         var app_label = spliturl[spliturl.length-3];
         var model_name= spliturl[spliturl.length-2];
         
@@ -278,6 +282,10 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
     }
     
     function InitContentType(obj) {
+      if (obj.attr('name') && obj.attr('name').indexOf('content_type-object_id') !== -1) {
+        // This is a generic stacked inlineadmin or tabularadmin
+        return;
+      }
         obj.bind("change", function() {
             var node = $(this).closest('div[class*="content_type"]').next(),
                 lookupLink = node.find('a.related-lookup'),
