@@ -73,6 +73,10 @@ a.add-another {
     margin-left: -25px;
 }
 
+a.edit-another {
+	margin-left:5px;
+}
+
 button.fb_show, 
 button.ui-gAutocomplete-browse, 
 button.ui-gFacelist-browse, 

@@ -78,6 +78,16 @@ function showAddAnotherPopup(triggeringLink) {
     return false;
 }
 
+// Popup for edit links
+function showEditAnotherPopup(triggeringLink) {
+	if ($(triggeringLink).siblings("select").find("option:selected").val().length != 0){
+		triggeringLink.href += $(triggeringLink).siblings("select").find("option:selected").val() + "/";
+		showAddAnotherPopup(triggeringLink);
+	}
+	return false;
+}
+
+
 // customized from RelatedObjectLoopups.js
 function dismissAddAnotherPopup(win, newId, newRepr) {
     // newId and newRepr are expected to have previously been escaped by
