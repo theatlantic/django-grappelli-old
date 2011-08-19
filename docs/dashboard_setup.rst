@@ -6,26 +6,38 @@
 Dashboard Setup
 ===============
 
-**New in Grappelli 1.3:** Please see :ref:`Release Notes <releasenotes>`.
+.. versionadded:: 2.3
 
-With the Django Admin-Interface, the admin index page reflects the structure of your applications/models. With ``grappelli.dashboard`` you are able to change that structure and rearrange (or group) apps and models.
+With the Django admin interface, the admin index page reflects the structure of your applications/models. With ``grappelli.dashboard`` you are able to change that structure and rearrange (or group) apps and models.
 
 .. note::
-    ``grappelli.dashboard`` is a simplified version of `Django Admin Tools <http://packages.python.org/django-admin-tools/>`_: Bookmarks, Menus and the custom App-Index are not available with Grappelli.
+    ``grappelli.dashboard`` is a simplified version of `Django Admin Tools <http://packages.python.org/django-admin-tools/>`_: Bookmarks, Menus and the custom App-Index are **not available with Grappelli**.
 
 Add ``grappelli.dashboard`` to your Installed Apps
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------------------------
 
 Open ``settings.py`` and add ``grappelli.dashboard`` to your ``INSTALLED_APPS`` (before ``grappelli``)::
 
     INSTALLED_APPS = (
         'grappelli.dashboard',
-        'grappelli', # required
-        'django.contrib.admin', # required
+        'grappelli',
+        'django.contrib.admin',
+    )
+
+Add context-processors
+----------------------
+
+You need to add the request context-processor::
+
+    TEMPLATE_CONTEXT_PROCESSORS = (
+        "django.contrib.auth.context_processors.auth",
+        "django.core.context_processors.request",
+        "django.core.context_processors.i18n",
+        'django.contrib.messages.context_processors.messages',
     )
 
 Create a custom Dashboard
-^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
 To customize the index dashboard, you first need to add a custom dashboard::
     
@@ -44,7 +56,7 @@ Open your ``settings.py`` file and add the following::
     GRAPPELLI_INDEX_DASHBOARD = 'yourproject.dashboard.CustomIndexDashboard'
 
 Create custom Dashboards for multiple admin sites
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------------------
 
 If you have several admin sites, you need to create a custom dashboard for each site::
 

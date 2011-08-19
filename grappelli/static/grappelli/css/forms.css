@@ -217,6 +217,49 @@ input[type=file] {
     margin-bottom: -2px;
 }
 
+.module p.file-upload {
+    margin-bottom: 5px !important;
+    padding: 3px 0 0 !important;
+    font-size: 11px;
+    line-height: 20px;
+/*    font-size: 0;*/
+/*    color: transparent;*/
+}
+.file-upload a {
+    font-size: 12px;
+    font-weight: bold;
+}
+.file-upload br {
+    display: none;
+}
+.file-upload .clearable-file-input {
+    display: block;
+    margin: 0 0 5px;
+    padding: 0;
+    min-width: 320px;
+}
+.file-upload .clearable-file-input label {
+    display: inline-block;
+    float: none;
+    margin-bottom: -2px;
+    position: relative;
+    top: 0;
+}
+.file-upload .clearable-file-input input {
+    top: 5px !important;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .file-upload .clearable-file-input input {
+        top: 7px !important;
+    }
+}
+.file-upload input[type=file] {
+    position: relative;
+    top: 1px;
+    height: auto;
+    border: 0;
+}
+
 
 /*  Date & Time ................................................... */
 

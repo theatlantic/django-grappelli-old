@@ -8,29 +8,17 @@ Quick start guide
 
 For using |grappelli|, `Django <http://www.djangoproject.com>`_ needs to be installed and an `Admin Site <http://docs.djangoproject.com/en/dev/ref/contrib/admin/>`_ has to be activated.
 
-Download
---------
-
-Using ``easy_install``::
-
-    easy_install -Z django-grappelli
-
-Note that the ``-Z`` flag is required to tell ``easy_install`` not to
-create a zipped package (zipped packages prevent certain features of
-Django from working properly).
+Installation
+------------
 
 Using ``pip``::
 
     pip install django-grappelli
 
-Using ``svn`` (recommended)::
+Go to https://github.com/sehmaschine/django-grappelli if you need to download a package or clone the repo.
 
-    svn checkout http://django-grappelli.googlecode.com/svn/trunk/grappelli/ grappelli
-
-or download the package from http://code.google.com/p/django-grappelli/downloads/list
-
-Installation
-------------
+Setup
+-----
 
 Open ``settings.py`` and add ``grappelli`` to your ``INSTALLED_APPS`` (before ``django.contrib.admin``)::
 
@@ -42,7 +30,7 @@ Open ``settings.py`` and add ``grappelli`` to your ``INSTALLED_APPS`` (before ``
 Add URL-patterns::
 
     urlpatterns = patterns('',
-        (r'^grappelli/', include(grappelli.urls)),
+        (r'^grappelli/', include('grappelli.urls')),
     )
 
 Collect the media files::
@@ -56,7 +44,7 @@ Set ``ADMIN_MEDIA_PREFIX``::
 .. note::
     Please refer to the `Staticfiles Documentation <http://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/>`_ for setting up and using ``staticfiles``.
 
-If you're not using ``staticfiles`` you can either use a symlink from your media-directory (given by ``MEDIA_ROOT`` and ``MEDIA_URL``) or copy the grappelli media-files to your media-directory. Don't forget to set ``ADMIN_MEDIA_PREFIX`` accordingly.
+If you're not using ``staticfiles`` you can either use a symlink from your media-directory (given by ``MEDIA_ROOT`` and ``MEDIA_URL``) or copy the Grappelli media-files to your media-directory. Don't forget to set ``ADMIN_MEDIA_PREFIX`` accordingly.
 
 Testing
 -------

@@ -100,7 +100,7 @@ Dashboard modules have the following properties:
     Default value: 'grappelli/dashboard/module.html'.
 
 The ``Group`` class
-------------------------------------
+-------------------
 
 Represents a group of modules::
 
@@ -126,7 +126,7 @@ Represents a group of modules::
             ))
 
 The ``LinkList`` class
--------------------------------------
+----------------------
 
 A module that displays a list of links.
 
@@ -172,7 +172,7 @@ Here's an example of building a link list module::
             ))
 
 The ``AppList`` class
-------------------------------------
+---------------------
 
 Module that lists installed apps and their models.
 As well as the :class:`~grappelli.dashboard.modules.DashboardModule`
@@ -181,13 +181,13 @@ has two extra properties:
 
 ``models``
     A list of models to include, only models whose name (e.g.
-    "blog.comments.Comment") match one of the strings (e.g. "blog.*")
+    "blog.models.BlogEntry") match one of the strings (e.g. "blog.*")
     in the models list will appear in the dashboard module.
 
 ``exclude``
     A list of models to exclude, if a model name (e.g.
-    "blog.comments.Comment") match an element of this list (e.g.
-    "blog.comments.*") it won't appear in the dashboard module.
+    "blog.models.BlogEntry") match an element of this list (e.g.
+    "blog.*") it won't appear in the dashboard module.
 
 If no models/exclude list is provided, **all apps** are shown.
 
@@ -219,7 +219,7 @@ Here's an example of building an app list module::
     the django.contrib.auth.Group model won't be displayed.
 
 The ``ModelList`` class
---------------------------------------
+-----------------------
 
 Module that lists a set of models.
 As well as the :class:`~grappelli.dashboard.modules.DashboardModule`
@@ -228,13 +228,13 @@ two extra arguments:
 
 ``models``
     A list of models to include, only models whose name (e.g.
-    "blog.comments.Comment") match one of the strings (e.g. "blog.*")
+    "blog.models.BlogEntry") match one of the strings (e.g. "blog.*")
     in the models list will appear in the dashboard module.
 
 ``exclude``
     A list of models to exclude, if a model name (e.g.
-    "blog.comments.Comment") match an element of this list (e.g.
-    "blog.comments.*") it won't appear in the dashboard module.
+    "blog.models.BlogEntry") match an element of this list (e.g.
+    "blog.*") it won't appear in the dashboard module.
 
 Here's a small example of building a model list module::
     
@@ -245,9 +245,15 @@ Here's a small example of building a model list module::
             Dashboard.__init__(self, **kwargs)
             
             self.children.append(modules.ModelList(
-                title='Applications',
+                title='Several Models',
                 column=1,
                 models=('django.contrib.*',)
+            ))
+            
+            self.children.append(modules.ModelList(
+                title='Single Model',
+                column=1,
+                models=('blog.models.BlogEntry',)
             ))
 
 .. note::
@@ -257,7 +263,7 @@ Here's a small example of building a model list module::
     the django.contrib.auth.Group model won't be displayed.
 
 The ``RecentActions`` class
-------------------------------------------
+---------------------------
 
 Module that lists the recent actions for the current user.
 As well as the :class:`~grappelli.dashboard.modules.DashboardModule`
@@ -292,7 +298,7 @@ Here's an example of building a recent actions module::
             ))
 
 The ``Feed`` class
----------------------------------
+------------------
 
 Class that represents a feed dashboard module.
 

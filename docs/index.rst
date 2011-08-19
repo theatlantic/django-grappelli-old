@@ -5,15 +5,17 @@
 .. |grappelli| replace:: Grappelli
 .. |filebrowser| replace:: FileBrowser
 
-Django Grappelli Documentation
-==============================
+.. _index:
 
-This documentation covers version 2.3 of |grappelli|. |grappelli| is a grid-based alternative/extension to the `Django <http://www.djangoproject.com>`_ administration interface.
+Documentation
+=============
 
-.. note::
-    This is a preliminary version of the Grappelli Documentation.
+**A jazzy skin for the Django admin interface**.
 
-**Contents**
+This documentation covers version 2.3.4 of |grappelli|. |grappelli| is a grid-based alternative/extension to the `Django <http://www.djangoproject.com>`_ administration interface.
+
+Installation & Setup
+--------------------
 
 .. toctree::
    :maxdepth: 2
@@ -21,7 +23,8 @@ This documentation covers version 2.3 of |grappelli|. |grappelli| is a grid-base
    quickstart
    customization
 
-**Dashboard**
+Dashboard
+---------
 
 .. toctree::
    :maxdepth: 2
@@ -31,7 +34,8 @@ This documentation covers version 2.3 of |grappelli|. |grappelli| is a grid-base
    dashboard_layout
    dashboard_extension
 
-**Internals**
+Internals
+---------
 
 .. toctree::
    :maxdepth: 2
@@ -39,13 +43,26 @@ This documentation covers version 2.3 of |grappelli|. |grappelli| is a grid-base
    templates
    javascripts
 
-**Help**
+Help
+----
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    
    faq
    thirdparty
    troubleshooting
    djangoissues
    releasenotes
+   changelog
+
+Code
+----
+
+https://github.com/sehmaschine/django-grappelli
+
+Discussion
+----------
+
+Use the `Grappelli Google Group <http://groups.google.com/group/django-grappelli>`_ to ask questions or discuss features.
+
