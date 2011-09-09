@@ -8,7 +8,7 @@
         <ul id="user-tools">
             <!-- Username -->
             <li class="user-options-container collapse closed">
-                <a href="javascript://" class="user-options-handler collapse-handler">{% firstof user.display_name user.first_name user.username %}</a>
+                <a href="javascript://" title="{{ user.pk }}" class="user-options-handler collapse-handler">{% firstof user.display_name user.first_name user.username %}</a>
                 <ul class="user-options">
                     <!-- Change Password -->
 					<li><a href="{% url admin:index %}account/user/{{ user.pk }}">Edit profile</a></li>
