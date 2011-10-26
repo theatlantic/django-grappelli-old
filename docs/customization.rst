@@ -85,12 +85,12 @@ Related Lookups
 .. versionchanged:: 2.3.1
     Added ``related_lookup_fields``.
 
-With Grappelli, you're able to add the representation of an object beside the input-field (for fk- and m2m-fields)::
+With Grappelli, you're able to add the representation of an object beneath the input-field (for fk- and m2m-fields)::
 
     class MyModel(models.Model):
         related_fk = models.ForeignKey(RelatedModel, verbose_name=u"Related Lookup (FK)")
         related_m2m = models.ManyToManyField(RelatedModel, verbose_name=u"Related Lookup (M2M)")
-
+    
     class MyModelOptions(admin.ModelAdmin):
         # define the raw_id_fields
         raw_id_fields = ('related_fk','related_m2m',)
@@ -100,18 +100,7 @@ With Grappelli, you're able to add the representation of an object beside the in
             'm2m': ['related_m2m'],
         }
 
-.. note::
-    This is a workaround for a feature which should be implemented with the original admin interface.
-
-.. _customizationgenericrelationships:
-
-Generic Relationships
----------------------
-
-.. versionchanged:: 2.3.1
-    Added ``related_lookup_fields``.
-
-With Grappelli, you're able to add the representation of an object for Generic Relations::
+With Generic Relations, related lookups are defined like this::
 
     from django.contrib.contenttypes import generic
     from django.contrib.contenttypes.models import ContentType
@@ -133,8 +122,86 @@ With Grappelli, you're able to add the representation of an object for Generic R
             'generic': [['content_type', 'object_id'], ['relation_type', 'relation_id']],
         }
 
-.. note::
-    This is a workaround for a feature which should be implemented with the original admin interface.
+If your generic relation points to a model using a custom primary key, you need to add a property ``id``::
+
+    class RelationModel(models.Model):
+        cpk  = models.IntegerField(primary_key=True, unique=True, editable=False)
+        
+        @property
+        def id(self):
+            return self.cpk
+
+.. versionadded:: 2.3.4
+    ``related_label``.
+
+For the represantation of an object, we first check for a callable ``related_label``. If not given, ``__unicode__`` is being used::
+
+    def __unicode__(self):
+        return u"%s" % self.name
+    
+    def related_label(self):
+        return u"%s (%s)" % (self.name, self.id)
+
+.. warning::
+    Due to a bug in Django 1.3, raw_id_fields (including related-lookups) are not working with list_editables.
+
+.. _customizationautocompletelookups:
+
+Autocomplete Lookups
+--------------------
+
+.. versionchanged:: 2.3.5
+    staticmethod ``autocomplete_search_fields`` is required, ``related_autocomplete_lookup`` has been removed.
+.. versionadded:: 2.3.4
+    ``autocomplete_lookup_fields``.
+
+Add the staticmethod ``autocomplete_search_fields`` to all models you want to search for::
+
+    class     @staticmethod
+    def autocomplete_search_fields():
+       return ("id__iexact", "name__icontains",)(models.Model):
+        name = models.CharField(u"Name", max_length=50)
+    
+        @staticmethod
+        def autocomplete_search_fields():
+            return ("id__iexact", "name__icontains",)
+
+Defining autocomplete lookups is very similar to related lookups::
+
+    class MyModel(models.Model):
+        related_fk = models.ForeignKey(RelatedModel, verbose_name=u"Related Lookup (FK)")
+        related_m2m = models.ManyToManyField(RelatedModel, verbose_name=u"Related Lookup (M2M)")
+    
+    class MyModelOptions(admin.ModelAdmin):
+        # define the raw_id_fields
+        raw_id_fields = ('related_fk','related_m2m',)
+        # define the autocomplete_lookup_fields
+        autocomplete_lookup_fields = {
+            'fk': ['related_fk'],
+            'm2m': ['related_m2m'],
+        }
+
+This also works with generic relations::
+
+    from django.contrib.contenttypes import generic
+    from django.contrib.contenttypes.models import ContentType
+    from django.db import models
+    
+    class MyModel(models.Model):
+        # first generic relation
+        content_type = models.ForeignKey(ContentType, blank=True, null=True, related_name="content_type")
+        object_id = models.PositiveIntegerField(blank=True, null=True)
+        content_object = generic.GenericForeignKey("content_type", "object_id")
+        # second generic relation
+        relation_type = models.ForeignKey(ContentType, blank=True, null=True, related_name="relation_type")
+        relation_id = models.PositiveIntegerField(blank=True, null=True)
+        relation_object = generic.GenericForeignKey("relation_type", "relation_id")
+    
+    class MyModelOptions(admin.ModelAdmin):
+        # define the autocomplete_lookup_fields
+        autocomplete_lookup_fields = {
+            'generic': [['content_type', 'object_id'], ['relation_type', 'relation_id']],
+        }
 
 If your generic relation points to a model using a custom primary key, you need to add a property ``id``::
 
@@ -145,7 +212,16 @@ If your generic relation points to a model using a custom primary key, you need 
         def id(self):
             return self.cpk
 
-.. _customizationtinymce:
+For the represantation of an object, we first check for a callable ``related_label``. If not given, ``__unicode__`` is being used::
+
+    def __unicode__(self):
+        return u"%s" % self.name
+    
+    def related_label(self):
+        return u"%s (%s)" % (self.name, self.id)
+
+.. warning::
+    Due to a bug in Django 1.3, raw_id_fields (including autocomplete-lookups) are not working with list_editables.
 
 Using TinyMCE
 -------------

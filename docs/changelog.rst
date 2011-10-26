@@ -8,13 +8,30 @@
 Changelog
 =========
 
-2.3.4 (not yet released)
+2.3.6 (not yet released)
 ------------------------
 
-* Moved |grappelli| to GitHub.
-* Fixed a bug with the View on Site link (tabular/stacked inlines).
-* Added a placeholder for inline sortables.
-* Fixed a bug with collapse all (stacked inlines).
+* Fixed a bug with toggle all actions on the changlist
+* Fixed a bug with adding dynamic-forms to tabular and stacked inlines (which caused the remove-handler to throw an error)
+* Autocompletes: Only do a lookup with generics, if content-type is defined.
+* Support for new URL tags, see https://docs.djangoproject.com/en/dev/releases/1.3/#changes-to-url-and-ssi.
+
+2.3.5 (11/10/2011)
+------------------
+
+* Improved performance for autocomplete lookups (staticmethod autocomplete_search_fields is required from now on)
+
+2.3.4 (08/09/2011)
+------------------
+
+* Moved |grappelli| to GitHub
+* Fixed a bug with the View on Site link (tabular/stacked inlines)
+* Added a placeholder for inline sortables
+* Fixed a bug with collapse all (stacked inlines)
+* Added autocompletes
+* Updated jQuery (to 1.6.2) and jQueryUI (to 1.8.15)
+* Added error-messages to the login form
+* Fixed a bug with hidden-fields in tabular-inlines
 
 2.3.3 (28/05/2011)
 ------------------
